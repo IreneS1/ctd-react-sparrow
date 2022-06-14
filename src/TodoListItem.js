@@ -7,7 +7,7 @@ function TodoListItem({ todo, onRemoveTodo }) {
 
     return (
         <>
-            <li>{todo.title} <button onClick={handleRemoveTodo} >Remove</button></li>
+            <li>{todo.fields.Title} <button onClick={handleRemoveTodo} >Remove</button></li>
         </>
     )
 }
