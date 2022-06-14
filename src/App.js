@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 
@@ -29,32 +30,32 @@ function App() {
   }, []);
 
   // POST
-  React.useEffect(() => {
-    let _data = {
-      "fields": {
-        "Title": "Wake up"
-      },
-      "typecast": true
-    };
+  // React.useEffect(() => {
+  //   let _data = {
+  //     "fields": {
+  //       "Title": "Wake up"
+  //     },
+  //     "typecast": true
+  //   };
 
-    const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
-    fetch(reqUrl, {
-      method: 'POST',
-      body: JSON.stringify(_data),
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then((json => console.log(json)))
-  }, [setTodoList])
+  //   const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+  //   fetch(reqUrl, {
+  //     method: 'POST',
+  //     body: JSON.stringify(_data),
+  //     headers: {
+  //       Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then((json => console.log(json)))
+  // }, [setTodoList])
 
-  React.useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
-    }
-  });
+  // React.useEffect(() => {
+  //   if (!isLoading) {
+  //     localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+  //   }
+  // });
 
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
@@ -70,13 +71,25 @@ function App() {
   }
 
   return (
-    <>
-      <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-
-      {isLoading ? <p>Loading...</p> :
-        <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
-    </>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            index
+            exact
+            path="/"
+            element={
+              <>
+                <h1>Todo List</h1>
+                <AddTodoForm onAddTodo={addTodo} />
+                {isLoading ? <p>Loading...</p> :
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+              </>
+            } />
+          <Route path="/new" element={<h1>New Todo List</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 
