@@ -1,4 +1,5 @@
 import React from 'react'
+import '../Styles/InputWithLabel.css';
 
 const InputWithLabel = ({ todoTitle, onChange, children }) => {
     const handleTitleChange = onChange;
@@ -19,6 +20,8 @@ const InputWithLabel = ({ todoTitle, onChange, children }) => {
                 value={todoTitle}
                 ref={inputRef}
                 onChange={handleTitleChange}
+                placeholder="New Todo Item"
+                className='input'
             />
         </>
     )
