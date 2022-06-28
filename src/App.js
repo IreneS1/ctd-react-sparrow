@@ -4,19 +4,51 @@ import AddTodoForm from './AddTodoForm';
 
 function App() {
 
-  const [todoList, setTodoList] = React.useState([]);
+  const [todoList, setTodoList] = React.useState(JSON.parse(localStorage.getItem("savedTodoList")));
   const [isLoading, setIsLoading] = React.useState(true);
 
+
+  // GET request
   React.useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(
-        () => resolve({ data: { todoList: JSON.parse(localStorage.getItem('savedTodoList')) } }), "2000")
-    })
+    const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+    const options = {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+      },
+    };
+    console.log(reqUrl);
+    fetch(reqUrl, options)
       .then((result) => {
-        setTodoList(result.data.todoList);
-        setIsLoading(false);
+        return result.json();
       })
+      .then((result) => {
+        console.log(result);
+        setTodoList(result.records);
+        setIsLoading(false);
+      });
   }, []);
+
+  // POST
+  React.useEffect(() => {
+    let _data = {
+      "fields": {
+        "Title": "Wake up"
+      },
+      "typecast": true
+    };
+
+    const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+    fetch(reqUrl, {
+      method: 'POST',
+      body: JSON.stringify(_data),
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then((json => console.log(json)))
+  }, [setTodoList])
 
   React.useEffect(() => {
     if (!isLoading) {
