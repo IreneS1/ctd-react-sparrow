@@ -9,6 +9,7 @@ function App() {
 
   const [todoList, setTodoList] = React.useState(JSON.parse(localStorage.getItem("savedTodoList")));
   const [isLoading, setIsLoading] = React.useState(true);
+  // const [onAddTodo, setOnAddTodo] = React.useState('');
 
 
   // GET request
@@ -19,53 +20,35 @@ function App() {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
       },
     };
-    console.log(reqUrl);
+    // console.log(reqUrl);
     fetch(reqUrl, options)
       .then((result) => {
         return result.json();
       })
       .then((result) => {
-        console.log(result);
+        console.log("This is the GET result", result);
         setTodoList(result.records);
         setIsLoading(false);
       });
   }, []);
 
-  // POST
-  // React.useEffect(() => {
-  //   let _data = {
-  //     "fields": {
-  //       "Title": "Wake up"
-  //     },
-  //     "typecast": true
-  //   };
-
-  //   const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
-  //   fetch(reqUrl, {
-  //     method: 'POST',
-  //     body: JSON.stringify(_data),
-  //     headers: {
-  //       Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then((json => console.log(json)))
-  // }, [setTodoList])
-
-  // React.useEffect(() => {
-  //   if (!isLoading) {
-  //     localStorage.setItem('savedTodoList', JSON.stringify(todoList));
-  //   }
-  // });
+  // useEffect on loading
+  React.useEffect(() => {
+    if (!isLoading) {
+      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
+    }
+  });
 
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
+    console.log("this is the todolist", todoList);
   }
+
+
 
   const removeTodo = (id) => {
     const item = todoList.find(element => element.id === id);
-    console.log(item);
+    console.log("This is the item removed", item);
     const itemIndex = todoList.indexOf(item);
     todoList.splice(itemIndex, 1);
     const updatedTodoList = [].concat(todoList);
