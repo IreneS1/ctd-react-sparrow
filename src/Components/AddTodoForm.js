@@ -13,12 +13,13 @@ const AddTodoForm = ({ onAddTodo }) => {
         setTodoTitle(newTodoTitle);
     };
 
+
     // handleAddTodo function makes a POST request to the api 
     const handleAddTodo = (event) => {
         let _data =
         {
             "fields": {
-                "Title": todoTitle
+                "title": todoTitle
             },
             "typecast": true,
         };

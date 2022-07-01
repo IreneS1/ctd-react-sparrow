@@ -2,17 +2,20 @@ import React from 'react'
 import '../Styles/TodoListItem.css';
 import PropTypes from "prop-types";
 
+
 function TodoListItem({ todo, onRemoveTodo }) {
+
     const handleRemoveTodo = () => {
         onRemoveTodo(todo.id);
     }
 
     return (
-        <>
-            <li className='ListItem'>{todo.fields.Title}
-                <button onClick={handleRemoveTodo} className='button' >Completed</button>
-            </li>
-        </>
+        <div className='containerList'>
+            <li className='ListItem'>
+                <input type='checkbox' className='checkbox' />{todo.fields.title}</li>
+            <p className='notes'>{todo.fields.notes}</p>
+            <button onClick={handleRemoveTodo} className='button' >Completed</button>
+        </div>
     )
 }
 

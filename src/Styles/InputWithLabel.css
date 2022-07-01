@@ -1,14 +1,2 @@
 @import url("https://fonts.googleapis.com/css2?family=Anek+Latin:wght@300&display=swap");
-.input {
-  font-family: "Anek Latin", sans-serif;
-  width: 30%;
-  border: 0;
-  border-bottom: 2px solid #5b5959;
-  outline: 0;
-  font-size: 1.3rem;
-  padding: 7px 0;
-  background: transparent;
-  -webkit-transition: border-color 0.2s;
-  transition: border-color 0.2s;
-}
 /*# sourceMappingURL=InputWithLabel.css.map */

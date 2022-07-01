@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "ACAA,OAAO,CAAC,gFAAI;ADEZ,AAAA,SAAS,CAAC;EACN,WAAW,ECAH,YAAY,EACxB,UAAU;EDAN,KAAK,ECII,OAAY;CDHxB;;AAED,AAAA,OAAO,CAAC;EACJ,UAAU,EAAE,WAAW;EACvB,MAAM,EAAE,iBAAiB;EACzB,OAAO,EAAE,GAAG;EACZ,MAAM,EAAE,OAAO;EAEf,UAAU,EAAE,gBAAgB;CAC/B",
+    "mappings": "ACAA,OAAO,CAAC,gFAAI;ADQZ,oBAAoB",
     "sources": [
         "TodoListItem.scss",
         "../Variables/Variables.scss"

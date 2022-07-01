@@ -1,9 +1,16 @@
 import React from 'react';
+import Airtable from 'airtable';
 import TodoList from './Components/TodoList';
 import AddTodoForm from './Components/AddTodoForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import './Styles/App.css';
+
+
+
+const base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY }).base(
+  process.env.REACT_APP_AIRTABLE_BASE_ID
+);
 
 function App() {
 
@@ -14,22 +21,14 @@ function App() {
 
   // GET request
   React.useEffect(() => {
-    const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
-    const options = {
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-      },
-    };
-    // console.log(reqUrl);
-    fetch(reqUrl, options)
-      .then((result) => {
-        return result.json();
-      })
-      .then((result) => {
-        console.log("This is the GET result", result);
-        setTodoList(result.records);
+    base("default")
+      .select({ view: "Grid view" })
+      .eachPage((records, fetchNextPage) => {
+        setTodoList(records);
         setIsLoading(false);
+        fetchNextPage();
       });
+
   }, []);
 
   // useEffect on loading
@@ -39,15 +38,21 @@ function App() {
     }
   });
 
+  // add to do 
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo])
     console.log("this is the todolist", todoList);
   }
 
-
-
+  // API call to DELETE todo list item
   const removeTodo = (id) => {
+
+    var Airtable = require('airtable');
+    var base = new Airtable({ apiKey: process.env.REACT_APP_AIRTABLE_API_KEY }).base(
+      process.env.REACT_APP_AIRTABLE_BASE_ID
+    );
     const item = todoList.find(element => element.id === id);
+    base('default').destroy(item.id) // destroy using element id
     console.log("This is the item removed", item);
     const itemIndex = todoList.indexOf(item);
     todoList.splice(itemIndex, 1);
@@ -56,7 +61,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='todo-app'>
       <BrowserRouter>
         <Routes>
           <Route
