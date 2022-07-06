@@ -2,22 +2,20 @@ import React from 'react'
 import TodoListItem from './TodoListItem'
 import PropTypes from "prop-types";
 
-const TodoList = ({ todoList, onRemoveTodo }) => {
-    return (
-        <>
-            <ul>
-                {todoList.map((item) => {
-                    return <TodoListItem
-                        key={item.id}
-                        todo={item}
-                        onRemoveTodo={onRemoveTodo}
-                    />
+const TodoList = ({ todoList, onRemoveTodo, onUpdateTodo }) => (
+    <>
+        <ul>
+            {todoList.map((item) => {
+                return <TodoListItem
+                    key={item.id}
+                    todo={item}
+                    onRemoveTodo={onRemoveTodo}
+                    onUpdateTodo={onUpdateTodo} />
+            })}
+        </ul>
+    </>
+)
 
-                })}
-            </ul>
-        </>
-    )
-}
 
 TodoList.propTypes = {
     todoList: PropTypes.array,
