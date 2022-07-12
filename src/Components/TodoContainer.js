@@ -56,8 +56,6 @@ const TodoContainer = () => {
             }
             console.log(record.fields.title);
 
-
-
         });
     }
 
@@ -85,17 +83,21 @@ const TodoContainer = () => {
                 console.error(err);
                 return;
             }
-            //console.log("airtable", record)
-            const itemIndex = todoList.indexOf(item);
-
-
-
-
-            // setTodoList([...todoList,])
-
-            //todoList[itemIndex] = updatedTodo;
-
-            //console.log("this is the todo list", todoList)
+            // Map through unedited todoList
+            const newTodoList = todoList.map((todo) => {
+                if (id === todo.id) {
+                    return {
+                        ...todo, //copy todo object info via spread
+                        fields: { // replace the nested fields object
+                            ...todo.fields, //with the same same one
+                            title: record.fields.title, // but change the title value inside of it
+                        }
+                    }
+                } else {
+                    return todo
+                }
+            })
+            setTodoList(newTodoList)
         });
     }
 
