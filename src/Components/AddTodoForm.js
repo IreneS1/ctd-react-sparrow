@@ -13,34 +13,43 @@ const AddTodoForm = ({ onAddTodo }) => {
         setTodoTitle(newTodoTitle);
     };
 
+
     // handleAddTodo function makes a POST request to the api 
     const handleAddTodo = (event) => {
-        let _data =
-        {
-            "fields": {
-                "Title": todoTitle
-            },
-            "typecast": true,
-        };
+        // let _data =
+        // {
+        //     "fields": {
+        //         "title": todoTitle
+        //     },
+        //     "typecast": true,
+        // };
 
 
         event.preventDefault();
         console.log("This is the todoTitle", todoTitle);
 
-        const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
-        console.log(reqUrl);
-        fetch(reqUrl, {
-            method: 'POST',
-            body: JSON.stringify(_data),
-            headers: {
-                Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(response => response.json())
-            .then((json => console.log(json)))
+        // const reqUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+        // console.log(reqUrl);
+        // fetch(reqUrl, {
+        //     method: 'POST',
+        //     body: JSON.stringify(_data),
+        //     headers: {
+        //         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        //         'Content-Type': 'application/json',
+        //     },
+        // })
+        //     .then(response => response.json())
+        //     .then((json => onAddTodo({
+        //         "fields": {
+        //             "title": todoTitle,
+        //             "id": json.id
+        //         },
+        //         "typecast": true,
+        //     })))
+        // .then((json => console.log("This is the post.2", json.fields)))
 
-        onAddTodo(_data);
+        //onAddTodo(_data);
+        onAddTodo({ 'title': todoTitle, 'id': Date.now() });
         setTodoTitle(" ");
     };
 

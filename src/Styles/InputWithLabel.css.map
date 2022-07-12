@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "ACAA,OAAO,CAAC,gFAAI;ADEZ,AAAA,MAAM,CAAC;EACH,WAAW,ECAH,YAAY,EACxB,UAAU;EDAN,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,CAAC;EACT,aAAa,EAAE,GAAG,CAAC,KAAK,CCGhB,OAAe;EDFvB,OAAO,EAAE,CAAC;EACV,SAAS,EAAE,MAAM;EACjB,OAAO,EAAE,KAAK;EACd,UAAU,EAAE,WAAW;EACvB,UAAU,EAAE,iBAAiB;CAChC",
+    "mappings": "ACAA,OAAO,CAAC,gFAAI",
     "sources": [
         "InputWithLabel.scss",
         "../Variables/Variables.scss"
