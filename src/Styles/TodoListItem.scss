@@ -1,0 +1,15 @@
+@import "../Variables/Variables.scss";
+
+.ListItem {
+    font-family: $mainFont;
+    color: $blackColor;
+}
+
+.button {
+    background: transparent;
+    border: 1px solid #171212;
+    padding: 5px;
+    cursor: pointer;
+
+    transition: all 0.1s ease-in;
+}
