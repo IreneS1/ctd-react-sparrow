@@ -88,12 +88,14 @@ const Priority = () => {
             <div className='container'>
                 <h1 className='header1'>Priority</h1>
                 <hr />
-                <AddTodoForm onAddTodo={addTodo} />
-                {isLoading ? <p>Loading...</p> :
-                    <TodoList
-                        todoList={todoList}
-                        onRemoveTodo={removeTodo}
-                        onUpdateTodo={updateTodo} />}
+                <div className='mainContainer'>
+                    <AddTodoForm onAddTodo={addTodo} />
+                    {isLoading ? <p>Loading...</p> :
+                        <TodoList
+                            todoList={todoList}
+                            onRemoveTodo={removeTodo}
+                            onUpdateTodo={updateTodo} />}
+                </div>
             </div>
         </div>
     )

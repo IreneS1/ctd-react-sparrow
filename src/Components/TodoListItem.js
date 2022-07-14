@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
 
-    // const [todoEdit, setTodoEdit] = React.useState("");
     const [editedText, setEditedText] = React.useState(todo.fields.title);
     const [isEditing, setIsEditing] = React.useState(false)
 
@@ -31,10 +30,13 @@ function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
 
             {isEditing ? <input
                 type="text"
+                className='editInput'
                 onChange={handleUpdateTodo}
                 value={editedText} /> : <p key={todo.id}>{todo.fields.title}</p>}
 
-            <button onClick={() => handleEditTodo(todo.id)}>Edit</button>
+            {/* <p className='notes'>{todo.fields.notes}</p> */}
+
+            <button className='editButton' onClick={() => handleEditTodo(todo.id)}>Edit</button>
 
 
             {/* {isEditing === true && todoEdit === todo.id ? (
@@ -47,12 +49,7 @@ function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
             {isEditing ?
                 (<button onClick={() => { handleEditTodo(todo.id) }} type="submit">Update</button>) :
                 (<button onClick={() => handleEditTodo(todo.id)}>Edit</button>)} */}
-
-
-            {/* Not sure if I want to include a checkbox */}
-            {/* <input type='checkbox' className='checkbox' /> */}
-            {/* <p className='notes'>{todo.fields.notes}</p> */}
-            <button onClick={handleRemoveTodo} className='button'>Completed</button>
+            <button onClick={handleRemoveTodo} className='completeButton'>Completed</button>
 
         </div>
 

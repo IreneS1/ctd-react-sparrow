@@ -1,4 +1,5 @@
 import React from 'react'
+import '../Styles/TodoContainer.css';
 import Airtable from 'airtable';
 import Navbar from './Navbar';
 import AddTodoForm from './AddTodoForm';
@@ -55,7 +56,7 @@ const TodoContainer = () => {
                 return;
             }
             console.log(record.fields.title);
-
+            setTodoList([...todoList, record])
         });
     }
 
@@ -74,7 +75,6 @@ const TodoContainer = () => {
     const updateTodo = (updatedTodo, id) => {
         console.log("update mode active", updatedTodo);
         //console.log(updatedTodo, id)
-        const item = todoList.find(element => element.id === id);
         base('default').update(id, {
             "priority": "false",
             "title": updatedTodo
@@ -108,12 +108,14 @@ const TodoContainer = () => {
                 <h1 className='header1'>Today's To•do List</h1>
                 <h3 className='date'>{date}</h3>
                 <hr />
-                <AddTodoForm onAddTodo={addTodo} />
-                {isLoading ? <p>Loading...</p> :
-                    <TodoList
-                        todoList={todoList}
-                        onRemoveTodo={removeTodo}
-                        onUpdateTodo={updateTodo} />}
+                <div className='mainContainer'>
+                    <AddTodoForm onAddTodo={addTodo} />
+                    {isLoading ? <p>Loading...</p> :
+                        <TodoList
+                            todoList={todoList}
+                            onRemoveTodo={removeTodo}
+                            onUpdateTodo={updateTodo} />}
+                </div>
             </div>
         </div>
     )
