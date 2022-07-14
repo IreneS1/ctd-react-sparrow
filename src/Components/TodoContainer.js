@@ -15,7 +15,7 @@ const TodoContainer = () => {
     const [isLoading, setIsLoading] = React.useState(true);
     const [date, setDate] = React.useState("");
 
-    // GET request with prop of table name
+    // GET request with table name
     React.useEffect(() => {
         base('default')
             .select({
@@ -45,7 +45,8 @@ const TodoContainer = () => {
         }
     });
 
-    // add to do using Create()
+    // add to-do using Create() to the api also sets priority feild false.
+    // set todo list with old list and new record
     const addTodo = (newTodo) => {
         base('default').create({
             "title": newTodo.title,

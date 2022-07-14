@@ -7,14 +7,15 @@ const AddTodoForm = ({ onAddTodo }) => {
 
     const [todoTitle, setTodoTitle] = React.useState("");
 
-
+    // handleTitleChange function gets user's input is set to new todo title on change.
     const handleTitleChange = (event) => {
         let newTodoTitle = event.target.value;
         setTodoTitle(newTodoTitle);
     };
 
 
-    // handleAddTodo function 
+    // handleAddTodo function invokes onAddTodo function with new 
+    // todo title and id on submit. Sets the todotitle input empty
     const handleAddTodo = (event) => {
         event.preventDefault();
         console.log("This is the todoTitle", todoTitle);

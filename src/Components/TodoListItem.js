@@ -8,15 +8,19 @@ function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
     const [editedText, setEditedText] = React.useState(todo.fields.title);
     const [isEditing, setIsEditing] = React.useState(false)
 
+    // handleRemoveTodo function invokes onRemoveTodo prop
     const handleRemoveTodo = () => {
         onRemoveTodo(todo.id);
     }
 
+    // handleUpdateTodo gets user's input and sets it to edited text
     const handleUpdateTodo = (event) => {
         let updatedTodo = event.target.value;
         setEditedText(updatedTodo);
     }
 
+    // handleEditTodo handels setIsEditing when isEditing is false. 
+    // also invokes onUpdateTodo with edited text and the item's id
     const handleEditTodo = (id) => {
         setIsEditing(!isEditing)
         let edit = editedText;
@@ -37,18 +41,6 @@ function TodoListItem({ todo, onRemoveTodo, onUpdateTodo }) {
             {/* <p className='notes'>{todo.fields.notes}</p> */}
 
             <button className='editButton' onClick={() => handleEditTodo(todo.id)}>Edit</button>
-
-
-            {/* {isEditing === true && todoEdit === todo.id ? (
-                <input
-                    type="text"
-                    onChange={handleUpdateTodo}
-                    value={editedText} />) :
-                (<li className='ListItem' key={todo.id}>{todo.fields.title}</li>)}
-
-            {isEditing ?
-                (<button onClick={() => { handleEditTodo(todo.id) }} type="submit">Update</button>) :
-                (<button onClick={() => handleEditTodo(todo.id)}>Edit</button>)} */}
             <button onClick={handleRemoveTodo} className='completeButton'>Completed</button>
 
         </div>

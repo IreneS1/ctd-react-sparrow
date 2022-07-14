@@ -17,7 +17,6 @@ const App = () => {
             exact
             path="/"
             element={<TodoContainer />} />
-          <Route path="/home" element={<h1>New Todo List</h1>} />
           <Route path="/priority" element={<Priority />} />
           <Route path="/goals" element={<Goals />} />
         </Routes>
