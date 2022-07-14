@@ -3,7 +3,7 @@ import TodoListItem from './TodoListItem'
 import PropTypes from "prop-types";
 
 const TodoList = ({ todoList, onRemoveTodo, onUpdateTodo }) => (
-    <>
+    <div className='todoListContainer'>
         <ul>
             {todoList.map((item) => {
                 return <TodoListItem
@@ -13,7 +13,7 @@ const TodoList = ({ todoList, onRemoveTodo, onUpdateTodo }) => (
                     onUpdateTodo={onUpdateTodo} />
             })}
         </ul>
-    </>
+    </div>
 )
 
 
